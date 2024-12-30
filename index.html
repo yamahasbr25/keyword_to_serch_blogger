@@ -105,7 +105,7 @@
                 .filter(keyword => keyword.trim() !== '')
                 .map(keyword => {
                     const encodedKeyword = keyword.trim().replace(/ /g, '%20');
-                    return `${domain}/search?q=${encodedKeyword}`;
+                    return `${domain}/search/q=${encodedKeyword}`;
                 });
 
             output.textContent = links.length ? links.join('\n') : 'No keywords provided.';
