@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyword to Blogger Search Link</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        textarea, input, button {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .output {
+            background: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Keyword to Blogger Search Link</h1>
+        <div class="form-group">
+            <label for="keywords">Keywords (one per line):</label>
+            <textarea id="keywords" rows="5" placeholder="Enter keywords here..."></textarea>
+        </div>
+        <div class="form-group">
+            <label for="domain">Blogger Domain:</label>
+            <input id="domain" type="text" placeholder="Enter Blogger domain (e.g., example.blogspot.com)">
+        </div>
+        <button onclick="generateLinks()">Generate Links</button>
+        <div class="form-group">
+            <label>Output:</label>
+            <div id="output" class="output"></div>
+        </div>
+    </div>
+
+    <script>
+        function generateLinks() {
+            const keywords = document.getElementById('keywords').value.trim().split('\n');
+            const domain = document.getElementById('domain').value.trim();
+            const output = document.getElementById('output');
+
+            if (!domain) {
+                output.textContent = 'Please enter a Blogger domain.';
+                return;
+            }
+
+            const links = keywords
+                .filter(keyword => keyword.trim() !== '')
+                .map(keyword => {
+                    const encodedKeyword = encodeURIComponent(keyword.trim());
+                    return `<a href="https://${domain}/search?q=${encodedKeyword}" target="_blank">${keyword.trim()}</a>`;
+                });
+
+            output.innerHTML = links.length ? links.join('\n') : 'No keywords provided.';
+        }
+    </script>
+</body>
+</html>
