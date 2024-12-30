@@ -104,11 +104,11 @@
             const links = keywords
                 .filter(keyword => keyword.trim() !== '')
                 .map(keyword => {
-                    const encodedKeyword = encodeURIComponent(keyword.trim());
-                    return `<a href="https://${domain}/search?q=${encodedKeyword}" target="_blank">${keyword.trim()}</a>`;
+                    const encodedKeyword = keyword.trim().replace(/ /g, '%20');
+                    return `${domain}/search?q=${encodedKeyword}`;
                 });
 
-            output.innerHTML = links.length ? links.join('\n') : 'No keywords provided.';
+            output.textContent = links.length ? links.join('\n') : 'No keywords provided.';
         }
     </script>
 </body>
